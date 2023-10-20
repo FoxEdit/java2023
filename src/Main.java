@@ -1,27 +1,31 @@
+
 public class Main {
     public static void main(String[] args) {
-        String word = "radars"; // Замените это слово на ваше слово
-
-        boolean result = isPalindromeRecursive(word, 0, word.length() - 1);
-
-        if(result)
-            System.out.println("YES");
-        else
-            System.out.println("NO");
+        String number = "001111110";
+        int count = countOnesInSequence(number, 0, 0);
+        System.out.println("Число 1 встречается " + count + " раз(а) в последовательности.");
     }
 
-    public static boolean isPalindromeRecursive(String word, int left, int right) {
-        // если осталась одна буква или нет букв, это палиндром
-        if (left >= right) {
-            return true;
+    public static int countOnesInSequence(String input, int index, int onesCount) {
+        if (index >= input.length()) {
+            // Достигнут конец ввода, возвращаем количество единиц.
+            return onesCount;
         }
 
-        // если буквы по краям не совпали это не палиндром
-        if (word.charAt(left) != word.charAt(right)) {
-            return false;
+        if (index + 1 < input.length()
+                && input.substring(index, index + 2).equals("00")) {
+            // Если найдены два нуля подряд, завершаем счет
+            return onesCount;
         }
 
-        // срезаем буквы
-        return isPalindromeRecursive(word, left + 1, right - 1);
+        char currentChar = input.charAt(index);
+
+        if (currentChar == '1') {
+            // Если текущий символ - '1', увеличиваем счетчик единиц.
+            onesCount++;
+        }
+
+        // Рекурсивный вызов для следующего символа.
+        return countOnesInSequence(input, index + 1, onesCount);
     }
 }
