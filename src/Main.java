@@ -1,11 +1,18 @@
+
+
 public class Main {
     public static void main(String[] args) {
-        SteelFork fork = new SteelFork();
-        GlassBottle bottle = new GlassBottle();
-        WoodenPlate plate = new WoodenPlate();
+        if (args.length != 1) {
+            System.out.println("Usage: java ImageDisplayApp <image_path>");
+            System.exit(1);
+        }
 
-        System.out.println("fork: " + fork.materialImpactSound() +
-                "\nbottle: " + bottle.materialImpactSound() +
-                "\nplate: " + plate.materialImpactSound());
+        // /home/foxedit/dog.jpeg
+        // /home/foxedit/samurai.jpg
+        // /home/foxedit/frog.png
+        String imagePath = args[0];
+
+        ImageDisplayApp app = new ImageDisplayApp(imagePath);
+        app.setVisible(true);
     }
 }
