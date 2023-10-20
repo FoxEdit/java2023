@@ -1,18 +1,27 @@
-
-
 public class Main {
     public static void main(String[] args) {
-        if (args.length != 1) {
-            System.out.println("Usage: java ImageDisplayApp <image_path>");
-            System.exit(1);
+        String word = "radars"; // Замените это слово на ваше слово
+
+        boolean result = isPalindromeRecursive(word, 0, word.length() - 1);
+
+        if(result)
+            System.out.println("YES");
+        else
+            System.out.println("NO");
+    }
+
+    public static boolean isPalindromeRecursive(String word, int left, int right) {
+        // если осталась одна буква или нет букв, это палиндром
+        if (left >= right) {
+            return true;
         }
 
-        // /home/foxedit/dog.jpeg
-        // /home/foxedit/samurai.jpg
-        // /home/foxedit/frog.png
-        String imagePath = args[0];
+        // если буквы по краям не совпали это не палиндром
+        if (word.charAt(left) != word.charAt(right)) {
+            return false;
+        }
 
-        ImageDisplayApp app = new ImageDisplayApp(imagePath);
-        app.setVisible(true);
+        // срезаем буквы
+        return isPalindromeRecursive(word, left + 1, right - 1);
     }
 }
